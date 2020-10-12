@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: ./app
+    restart: on-failure
+    container_name: service-application
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    environment:
+      - PORT=8080
+      - NODE_ENV=develop
+    networks:
+      - app-internal-network
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    networks:
+      - app-internal-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./database:/data/db
+
+  mongo_express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo
+    networks:
+      - app-internal-network
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+
+networks:
+  app-internal-network:
+    driver: bridge
