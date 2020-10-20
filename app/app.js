@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
 
+require('./logger')();
+require('./database/db')();
 const api = require('./api');
 
 const app = express();

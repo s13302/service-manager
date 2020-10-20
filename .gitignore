@@ -201,3 +201,5 @@ $RECYCLE.BIN/
 
 database/*
 !database/.gitkeep
+logs/
+!logs/.gitkeep

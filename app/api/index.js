@@ -1,4 +1,5 @@
 const express = require('express');
+const logger = require('log4js').getLogger('general');
 
 const router = express.Router();
 

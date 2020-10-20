@@ -8,6 +8,8 @@ RUN npm install
 
 COPY index.js ./
 COPY app.js ./
+COPY logger ./logger
+COPY database ./database
 COPY api ./api
 
 EXPOSE 8080
